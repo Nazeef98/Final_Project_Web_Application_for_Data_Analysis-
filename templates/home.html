@@ -11,17 +11,17 @@
             <div class="card">
                 <h3>Upload CSV</h3>
                 <p>Upload your student placement dataset for analysis.</p>
-                <a href="{{ url_for('upload_csv') }}" class="btn">Go to Upload</a> {# UPDATED LINK #}
+                <a href="{{ url_for('upload_csv') }}" class="btn">Go to Upload</a>
             </div>
             <div class="card">
                 <h3>Preview Data</h3>
                 <p>View and manage your uploaded datasets.</p>
-                <a href="{{ url_for('preview_data') }}" class="btn">Preview Data</a> {# UPDATED LINK #}
+                <a href="{{ url_for('preview_data') }}" class="btn">Preview Data</a>
             </div>
             <div class="card">
-                <h3>More Sections</h3>
-                <p>Explore other features of the application.</p>
-                <a href="#" class="btn">Explore More</a> {# Keep as placeholder for now #}
+                <h3>Visuals & Analysis</h3> {# NEW CARD #}
+                <p>Generate charts and perform basic data analysis.</p>
+                <a href="{{ url_for('visuals_analysis') }}" class="btn">Go to Analysis</a> {# NEW LINK #}
             </div>
         </section>
     </div>
