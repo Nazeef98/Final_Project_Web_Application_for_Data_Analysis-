@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="content-section">
+        <h2>Viewing File: {{ uploaded_file.filename }}</h2>
+        <p>Uploaded by: {{ uploaded_file.uploader.username }} on {{ uploaded_file.upload_date.strftime('%Y-%m-%d %H:%M') }}</p>
+
+        <h3>First 10 Rows Preview:</h3>
+        {% if data_html %}
+            <div class="table-responsive">
+                {{ data_html | safe }} {# The | safe filter tells Jinja2 to render the HTML string #}
+            </div>
+        {% else %}
+            <p>Could not generate a preview for this file.</p>
+        {% endif %}
+        
+        <p><a href="{{ url_for('preview_data') }}">Back to All Files</a></p>
+    </div>
+
+    <style>
+        /* Basic styling for the data table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #f2f2f2;
+        }
+        .table-responsive {
+            overflow-x: auto; /* Makes table scrollable on small screens */
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        .file-list li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-list li a {
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .file-list li a:hover {
+            text-decoration: underline;
+        }
+        .file-list li small {
+            color: #666;
+            font-size: 0.8em;
+        }
+    </style>
+{% endblock content %}

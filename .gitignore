@@ -1,2 +1,25 @@
-/venv/
+# Virtual environment
 venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Database file
+instance/*.db
+*.sqlite
+*.sqlite3
+
+# Instance folder (can contain sensitive configurations not committed to Git)
+/instance/
+
+# Uploaded files
+/uploads/ # <--- NEW LINE
+
+# IDE specific files (if using VS Code, PyCharm, etc.)
+.vscode/
+.idea/
+
+# Flask-specific files
+.flaskenv

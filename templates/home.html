@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="home-content">
+        {% if user %}
+            <h1>Welcome, {{ user.full_name }}!</h1>
+        {% else %}
+            <h1>Welcome! Please log in or sign up.</h1>
+        {% endif %}
+
+        <section class="dashboard-sections">
+            <div class="card">
+                <h3>Upload CSV</h3>
+                <p>Upload your student placement dataset for analysis.</p>
+                <a href="{{ url_for('upload_csv') }}" class="btn">Go to Upload</a> {# UPDATED LINK #}
+            </div>
+            <div class="card">
+                <h3>Preview Data</h3>
+                <p>View and manage your uploaded datasets.</p>
+                <a href="{{ url_for('preview_data') }}" class="btn">Preview Data</a> {# UPDATED LINK #}
+            </div>
+            <div class="card">
+                <h3>More Sections</h3>
+                <p>Explore other features of the application.</p>
+                <a href="#" class="btn">Explore More</a> {# Keep as placeholder for now #}
+            </div>
+        </section>
+    </div>
+{% endblock content %}
