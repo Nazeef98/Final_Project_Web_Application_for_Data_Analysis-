@@ -1,14 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, ValidationError
 from wtforms.validators import DataRequired, Email, EqualTo, Length
-from models import User # Import your User model to check for uniqueness
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime 
-from flask_wtf.file import FileField, FileRequired, FileAllowed # <--- NEW IMPORTS
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+from models import User  # Use the User model from models.py
 
-db = SQLAlchemy()
+# db = SQLAlchemy()
 
 class RegistrationForm(FlaskForm):
     full_name = StringField('Full Name', validators=[DataRequired(), Length(min=2, max=100)])
@@ -36,33 +32,33 @@ class LoginForm(FlaskForm):
 
 
 
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128), nullable=False)
-    # Relationship to uploaded files
-    files = db.relationship('UploadedFile', backref='uploader', lazy=True) # <--- NEW LINE
+# class User(db.Model, UserMixin):
+#     id = db.Column(db.Integer, primary_key=True)
+#     full_name = db.Column(db.String(100), nullable=False)
+#     email = db.Column(db.String(120), unique=True, nullable=False)
+#     username = db.Column(db.String(80), unique=True, nullable=False)
+#     password_hash = db.Column(db.String(128), nullable=False)
+#     # Relationship to uploaded files
+#     files = db.relationship('UploadedFile', backref='uploader', lazy=True) # <--- NEW LINE
 
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+#     def set_password(self, password):
+#         self.password_hash = generate_password_hash(password)
 
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+#     def check_password(self, password):
+#         return check_password_hash(self.password_hash, password)
 
-    def __repr__(self):
-        return f'<User {self.username}>'
+#     def __repr__(self):
+#         return f'<User {self.username}>'
 
-class UploadedFile(db.Model): # <--- NEW MODEL
-    id = db.Column(db.Integer, primary_key=True)
-    filename = db.Column(db.String(255), nullable=False)
-    storage_path = db.Column(db.String(500), nullable=False) # Full path where the file is stored
-    upload_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # Link to the User who uploaded it
+# class UploadedFile(db.Model): # <--- NEW MODEL
+#     id = db.Column(db.Integer, primary_key=True)
+#     filename = db.Column(db.String(255), nullable=False)
+#     storage_path = db.Column(db.String(500), nullable=False) # Full path where the file is stored
+#     upload_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # Link to the User who uploaded it
 
-    def __repr__(self):
-        return f'<UploadedFile {self.filename}>'
+#     def __repr__(self): 
+#         return f'<UploadedFile {self.filename}>'
 
 
 

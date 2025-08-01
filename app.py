@@ -1,6 +1,6 @@
 from flask import Flask
 from config import Config
-from models import db # Import the db object from models.py
+from models import db, User# Import the db object from models.py
 from routes import register_routes, login_manager # Import register_routes and login_manager
 
 def create_app():
